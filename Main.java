@@ -34,13 +34,13 @@ public class Main {
                     customer.displayDeposits(); // displays all deposits into the checking and savings account
                     break;
 
-                case "w":
-                    accountType = getAccount(scan); // gets account type input
+              case "w":
+                    accountType = getAccount(scan); // gets valid account type input
                     System.out.print("Enter amount to withdraw: "); // asks the user to enter withdrawal amount
                     double withdrawAmount = scan.nextDouble(); // stores the withdrawal amount entered by the user
-                    customer.withdraw(withdrawAmount, new Date(), accountType); // withdraws from the account
+                    customer.withdraw(withdrawAmount, new Date(), accountType); // when the customer attempts to withdraw, overdraft protection is enforced
                     System.out.println("Here are all the withdrawals:\n");
-                    customer.displayWithdraws(); // displays all withdrawals from checking and savings account
+                    customer.displayWithdraws(); // displays all withdrawals from the checking and savings account
                     break;
 
                 default:
