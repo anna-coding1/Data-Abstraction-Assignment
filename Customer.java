@@ -128,7 +128,7 @@ public class Customer {
         if(account.equals(CHECKING)) { // checks if the account is a checking account
             return(checkBalance-amt) >=OVERDRAFT; // makes sure the amount being withdrawn is not more than what is in the account
         } else if (account.equals(SAVING)) { // checks if the account is a savings account
-            return(savingBalance-amt) >=OVERDRAFT; // makes sure the amount being withdrawn is not more than what is in the account
+            return(savingBalance-amt) >=0; // makes sure the amount being withdrawn is not more than what is in the account
         } else {
             System.out.print("This account is invalid."); // if the account is invalid, this is printed to the console
             return false;
