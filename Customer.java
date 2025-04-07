@@ -91,10 +91,14 @@ public class Customer {
         }
 
         if (!checkOverdraft(amt, account)) { // checks if the amount being withdrawn is more than what is in the account
-            System.out.println("You cannot withdraw due to an overdraft."); // lets the user know that there is an overdraft
-            if (account.equals(CHECKING)) { // returns the current checking amount balance
+            System.out.println("Overdraft limit exceeded."); // lets the user know that there is an overdraft
+            if (account.equals(CHECKING)) {
+                System.out.println("Your current checking balance is $" + checkBalance + ". The overdraft limit: $" + (OVERDRAFT + checkBalance)); // Inform user of checking overdraft
                 return checkBalance;
-            } else {
+
+                //
+            } else if (account.equals(SAVING)) { // checks if the amount being withdrawn is more than what is in the account
+                System.out.println("Your current savings balance is $" + savingBalance + ". Savings overdraft limit: $" + (OVERDRAFT + savingBalance)); // lets the user know that there is an overdraft
                 return savingBalance;
             }
         }
@@ -104,11 +108,11 @@ public class Customer {
 
         if (account.equals(CHECKING)) { // checks if the withdrawal is from the checking account
             checkBalance -= amt; // if it is, the balance is subtracted from the total balance of the checking account
-            System.out.println("Your withdrawal was successful. The current balance of your checking account is $" + checkBalance); // prints out the balance after the withdrawal
+            System.out.println("Your withdrawal was successful. The current balance of your checking account is $" + checkBalance + " Overdraft limit is " + OVERDRAFT); // prints out the balance after the withdrawal
             return checkBalance;
         } else if (account.equals(SAVING)) { // checks if the withdrawal is from the saving account
             savingBalance -= amt; // if it is, the balance is subtracted from the total balance of the saving account
-            System.out.println("Your withdrawal was successful. The current balance of your saving account is $" + savingBalance); // prints out the balance after the withdrawal
+            System.out.println("Your withdrawal was successful. The current balance of your saving account is $" + savingBalance +" Overdraft limit is " + OVERDRAFT); // prints out the balance after the withdrawal
             return savingBalance;
         } else {
             System.out.println("The account is invalid"); // if the account is invalid, then this is printed to the console
@@ -128,7 +132,7 @@ public class Customer {
         if(account.equals(CHECKING)) { // checks if the account is a checking account
             return(checkBalance-amt) >=OVERDRAFT; // makes sure the amount being withdrawn is not more than what is in the account
         } else if (account.equals(SAVING)) { // checks if the account is a savings account
-            return(savingBalance-amt) >=0; // makes sure the amount being withdrawn is not more than what is in the account
+            return(savingBalance-amt) >=OVERDRAFT; // makes sure the amount being withdrawn is not more than what is in the account
         } else {
             System.out.print("This account is invalid."); // if the account is invalid, this is printed to the console
             return false;
